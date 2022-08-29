@@ -7,16 +7,13 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Download Nuget.exe
-      uses: NuGet/setup-nuget@v1.0.5
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
       with:
-        nuget-version: 5.4.0
-
-    - name: setup-msbuild
-      uses: microsoft/setup-msbuild@v1
+        dotnet-version: 6.0.x
 
     - name: Restore
-      run: nuget restore .\PushSharp.sln
+      run: dotnet restore .\PushSharp.sln
 
     - name: Build
-      run: msbuild .\PushSharp.sln
+      run: dotnet build --no-restore .\PushSharp.sln
